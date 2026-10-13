@@ -1,0 +1,11 @@
+PROJECT TITLE
+Code Court: Objection, That Answer Is Suspicious
+
+YOUR PROJECT (link)
+https://ephemeral-chaja-db04bb.netlify.app
+
+PREVIEW IMAGE
+cover_1800x1200.png (1800x1200, 3:2)
+
+DESCRIPTION (465/500)
+A courtroom bluffing game I built as a software engineer for dev-team warm-ups: 2-8 players see a code snippet, write a believable fake answer, then vote for the truth. A rotating Judge predicts which fake fools most; everyone gets one Objection. Hardest part: syncing every screen and edge cases, like a 2-player rule bug I caught in review. Fun: watching colleagues fall for 7 7. Learned: precise bug reports get fixes fast. Next: custom question packs for teams.

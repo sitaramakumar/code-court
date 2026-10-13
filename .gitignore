@@ -1,0 +1,7 @@
+node_modules/
+.netlify/
+game-build/dist/
+game-build/artifacts/
+*.zip
+*.log
+.DS_Store

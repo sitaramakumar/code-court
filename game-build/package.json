@@ -1,0 +1,22 @@
+{
+  "name": "code-court-netlify",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Sitarama Kumar Mokkapati",
+  "description": "Code Court, a real-time courtroom bluffing game built for Netlify Functions and Blobs.",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node --test tests/game-flow.test.mjs",
+    "package": "npm run test && node scripts/package-project.mjs"
+  },
+  "dependencies": {
+    "@netlify/blobs": "11.1.4"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "fflate": "0.8.3"
+  }
+}

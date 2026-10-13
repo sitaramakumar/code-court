@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11151b">
+  <title>Code Court — The party game for the technically guilty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Code Court home"><span class="brand-mark">CC</span><span>CODE<span class="brand-accent"> COURT</span></span></a>
+      <div class="top-right"><span class="live-dot"></span><span id="connection-label">READY TO RULE</span><div id="room-controls" class="room-controls hidden"></div><span class="top-divider"></span><span class="top-caption">A PARTY GAME FOR THE TECHNICALLY GUILTY</span></div>
+    </header>
+
+    <section id="entry-screen" class="entry-screen">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span>THE PEOPLE VS. YOUR CONFIDENCE</div>
+        <h1>Objection.<br><span>That answer</span><br>is suspicious.</h1>
+        <p class="hero-sub">A courtroom bluffing game for people who know just enough to sound convincing.</p>
+        <div class="hero-stats"><div><strong>2–8</strong><span>PLAYERS</span></div><i></i><div><strong>~1 min</strong><span>PER ROUND</span></div><i></i><div><strong>0</strong><span>LOGINS</span></div></div>
+        <div class="gavel-art" aria-hidden="true"><div class="gavel-shadow"></div><div class="gavel-head"></div><div class="gavel-handle"></div><div class="gavel-base"></div><span>CASE NO. 404</span></div>
+      </div>
+
+      <div class="entry-card card-surface">
+        <div class="card-kicker"><span class="kicker-icon">§</span> TAKE YOUR SEAT</div>
+        <label class="field-label" for="player-name">YOUR NAME</label>
+        <input id="player-name" class="text-input" maxlength="20" placeholder="e.g. Ada Lovelace" autocomplete="nickname">
+        <div class="mode-picker" role="group" aria-label="Game mode">
+          <button class="mode-option selected" data-mode="developer"><span class="mode-icon">{ }</span><span><b>Developer</b><small>Code on trial</small></span><span class="mode-check">✓</span></button>
+          <button class="mode-option" data-mode="general"><span class="mode-icon general-icon">?!</span><span><b>General</b><small>Trick questions</small></span><span class="mode-check">✓</span></button>
+        </div>
+        <div class="countdown-settings">
+          <label class="countdown-toggle-row" for="countdown-toggle"><span class="countdown-toggle-copy"><b>Countdown</b><small>Off by default</small></span><input id="countdown-toggle" type="checkbox"><span class="switch-track" aria-hidden="true"></span><span id="countdown-toggle-state" class="toggle-state">OFF</span></label>
+          <div id="countdown-options" class="countdown-options hidden">
+            <label class="field-label" for="countdown-preset">PHASE LENGTHS</label>
+            <select id="countdown-preset" class="text-input"><option value="quick">Quick · 25/15/10 s</option><option value="standard" selected>Standard · 45/30/15 s</option><option value="relaxed">Relaxed · 90/60/20 s</option><option value="custom">Custom</option></select>
+            <div id="countdown-custom" class="countdown-custom hidden"><label>FAKE<input class="text-input" type="number" id="fake-seconds" min="10" max="180" value="45"></label><label>VOTE<input class="text-input" type="number" id="vote-seconds" min="10" max="180" value="30"></label><label>REVEAL<input class="text-input" type="number" id="reveal-seconds" min="10" max="180" value="15"></label></div>
+            <p class="countdown-hint">Each custom phase can be 10–180 seconds.</p>
+          </div>
+        </div>
+        <button id="create-room" class="button button-primary button-full"><span>Create a room</span><span>↗</span></button>
+        <div class="or-rule"><span>OR JOIN A CASE IN PROGRESS</span></div>
+        <div class="join-row"><input id="room-code-input" class="text-input code-input" maxlength="6" placeholder="ROOM CODE" autocomplete="off" spellcheck="false"><button id="join-room" class="button button-secondary">Join <span>→</span></button></div>
+        <p id="entry-error" class="error-text" aria-live="polite"></p>
+        <div class="rules-strip"><div class="rules-title">THE RULES, BRIEFLY</div><div>Write a fake. Spot the truth.</div><div>Bluff, vote, and raise one Objection.</div><div>Everyone judges once. Highest score wins.</div></div>
+      </div>
+    </section>
+
+    <section id="lobby-screen" class="room-screen hidden">
+      <div class="room-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span>COURT IS FORMING</div><h1>Gather your<br><span>jury.</span></h1></div><div class="case-stamp">CASE<br><strong>NO. <span id="lobby-rounds">03</span></strong><small>UP TO 8 SEATS</small></div></div>
+      <div class="lobby-grid">
+        <div class="card-surface room-card"><div class="card-kicker"><span class="kicker-icon">⌂</span> YOUR COURTROOM</div><p class="muted">Share the room code with your jury.</p><div class="room-code-row"><div id="room-code-display" class="room-code">------</div><button id="copy-code" class="copy-button" title="Copy room code">⧉</button></div><div id="copy-feedback" class="copy-feedback"></div><div class="share-hint">Players can join from any device</div><div id="room-countdown-setting" class="room-countdown-setting"></div><div class="room-divider"></div><div class="lobby-label">IN THE ROOM <span id="player-count">0</span>/8</div><div id="player-list" class="player-list"></div><button id="start-game" class="button button-primary button-full"><span>Call the court to order</span><span>↗</span></button><p id="start-hint" class="muted center">Waiting for at least one more player…</p></div>
+        <div class="lobby-aside"><div class="aside-card"><span class="aside-number">01</span><div><b>Make your case</b><p>One player is Judge. Everyone else writes a believable fake.</p></div></div><div class="aside-card"><span class="aside-number">02</span><div><b>Pick the truth</b><p>Choose the real answer from a lineup of fakes and decoys.</p></div></div><div class="aside-card"><span class="aside-number">03</span><div><b>Objection!</b><p>Use your one shot to call out a fake. Be right, earn points.</p></div></div><div class="mode-note"><span class="live-dot"></span> <span id="mode-note">DEVELOPER MODE · CODE ON TRIAL</span></div></div>
+      </div>
+    </section>
+
+    <section id="game-screen" class="game-screen hidden">
+      <div class="game-topline"><div><div class="eyebrow"><span class="eyebrow-line"></span><span id="game-mode-label">DEVELOPER MODE</span></div><div class="round-label">ROUND <strong id="round-current">1</strong><span class="round-slash">/</span><span id="round-total">3</span><span class="round-dot">·</span><span id="phase-label">FAKE ON THE RECORD</span></div></div><div id="timer-box" class="timer-box"><span class="timer-caption">TIME LEFT</span><strong id="timer">25</strong><span class="timer-unit">SEC</span><div class="timer-track"><i id="timer-bar"></i></div></div><div id="host-advance-indicator" class="host-advance-indicator hidden">NO COUNTDOWN · HOST ADVANCES</div></div>
+      <div class="game-layout"><div class="question-column"><article class="question-card card-surface"><div class="question-label"><span class="gavel-small">⚖</span> THE QUESTION <span class="question-docket">EVIDENCE A</span></div><h2 id="question-prompt">What does this print?</h2><pre id="code-snippet" class="code-block"><code></code></pre><div id="judge-truth" class="judge-truth hidden"></div></article><div id="phase-card" class="phase-card card-surface"></div><div id="feedback" class="game-feedback" aria-live="polite"></div></div><aside class="score-column"><div class="score-card card-surface"><div class="score-head"><span>THE SCOREBOARD</span><span class="score-live"><i></i> LIVE</span></div><div id="score-list" class="score-list"></div></div><div class="bench-note"><span class="bench-icon">✳</span><p>Fastest correct vote wins a bonus point.</p></div></aside></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
